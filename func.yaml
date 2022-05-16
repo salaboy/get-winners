@@ -1,0 +1,30 @@
+version: 0.23.1
+name: get-winners
+namespace: ""
+runtime: go
+registry: ""
+image: docker.io/salaboy/get-winners:latest
+imageDigest: sha256:7f0d012b19e52310020ddb1f67dea22a87192319555b625b62ee964602e17da5
+build: local
+git: {}
+builder: gcr.io/paketo-buildpacks/builder:base
+builders:
+  base: gcr.io/paketo-buildpacks/builder:base
+  default: gcr.io/paketo-buildpacks/builder:base
+  full: gcr.io/paketo-buildpacks/builder:full
+buildpacks:
+- paketo-buildpacks/go-dist
+- ghcr.io/boson-project/go-function-buildpack:tip
+volumes: []
+buildEnvs: []
+envs:
+- value: '{{ secret:redis }}'
+annotations: {}
+options: {}
+labels: []
+healthEndpoints:
+  liveness: /health/liveness
+  readiness: /health/readiness
+created: 2022-05-16T09:22:04.285699+01:00
+invocation:
+  format: http
